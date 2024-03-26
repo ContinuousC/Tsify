@@ -237,7 +237,7 @@ impl<'a> Parser<'a> {
                 };
 
                 TsTypeElement {
-                    key,
+                    key: key.to_string(),
                     type_ann,
                     optional: optional || !default_is_none,
                 }
@@ -259,7 +259,7 @@ impl<'a> Parser<'a> {
             .map(|variant| {
                 let decl = self.create_type_alias_decl(self.parse_variant(variant));
                 if let Decl::TsTypeAlias(mut type_alias) = decl {
-                    type_alias.id = variant.attrs.name().serialize_name();
+                    type_alias.id = variant.attrs.name().serialize_name().to_string();
 
                     type_alias
                 } else {
@@ -285,7 +285,7 @@ impl<'a> Parser<'a> {
 
     fn parse_variant(&self, variant: &Variant) -> TsType {
         let tag_type = self.container.serde_attrs().tag();
-        let name = variant.attrs.name().serialize_name();
+        let name = variant.attrs.name().serialize_name().to_string();
         let style = variant.style;
         let type_ann: TsType = self.parse_fields(style, &variant.fields).into();
         type_ann.with_tag_type(name, style, tag_type)
