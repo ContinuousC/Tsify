@@ -9,10 +9,10 @@ repository = "https://github.com/madonoharu/tsify"
 homepage = "https://github.com/madonoharu/tsify"
 keywords = ["wasm", "wasm-bindgen", "typescript"]
 categories = ["wasm"]
-publish = ["si"]
+publish = false
 
 [dependencies]
-tsify-macros = { registry = "si", path = "tsify-macros", version = "0.4.8" }
+tsify-macros = { path = "tsify-macros", version = "0.4.8" }
 wasm-bindgen = { version = "0.2.86", optional = true }
 serde = { version = "1.0", optional = true }
 serde_json = { version = "1.0", optional = true }
